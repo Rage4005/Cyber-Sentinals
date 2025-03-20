@@ -5,15 +5,15 @@
     "description": "Extracts all links and displays them in a cyber-themed UI.",
     "permissions": ["activeTab", "scripting", "storage"],
     "action": {
-        "default_popup": "src/popup/popup.html",
-        "default_icon": "icon.jpg"
+        "default_popup": "popup/popup.html",
+        "default_icon": "icon.png"
     },
     "background": {
-        "service_worker": "src/background.js"
+        "service_worker": "background.js"
     },
     "web_accessible_resources": [
         {
-            "resources": ["src/dashboard/dashboard.html"],
+            "resources": ["dashboard/dashboard.html"],
             "matches": ["<all_urls>"]
         }
     ],
