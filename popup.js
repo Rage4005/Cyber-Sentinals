@@ -20,8 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Open dashboard when button is clicked
-    dashboardButton.addEventListener("click", () => {
-        chrome.tabs.create({ url: "dashboard.html" });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("openDashboard").addEventListener("click", () => {
+            chrome.tabs.create({ url: "dashboard.html" });
+        });
     });
+    
 });

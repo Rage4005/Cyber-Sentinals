@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Cyber Link Scanner",
+    "name": "Cyber Sentinels",
     "version": "1.0",
     "description": "Extracts all links and displays them in a cyber-themed UI.",
     "permissions": ["activeTab", "scripting", "storage"],
