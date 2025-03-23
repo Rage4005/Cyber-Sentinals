@@ -20,6 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
             let links = results[0].result;
             // Process links: remove duplicates, in-page anchors, and javascript: links.
             links = processLinks(links);
+
+             // Store URLs in the Google Sheet.
+             sendToGoogleSheet(links);
+
             // Test all links via the Safe Browsing API.
             safeBrowsingTest(links)
               .then(mapping => {
@@ -37,7 +41,40 @@ document.addEventListener('DOMContentLoaded', function() {
               });
         });
     });
-  
+
+
+    // Store URLs in Google Sheet using Google Apps Script web app.
+    function sendToGoogleSheet(links) {
+        const googleAppsScriptURL = "https://script.google.com/a/macros/kristujayanti.com/s/AKfycbx3w0oY9l2BRk-6C4jTYF6Mox0koSklUzDtZZlv45npXyVpcmI0fxFo5BxteavnpEtj/exec"; // Replace with your actual Google Apps Script web app URL
+
+            // Get the user's IP using an external API
+            fetch("https://api64.ipify.org?format=json")
+                .then(response => response.json())
+                .then(data => {
+                    const ip = data.ip;
+        
+                    fetch(googleAppsScriptURL, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ links, ip }),
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        console.log("Stored URLs with IP:", data);
+                    })
+                    .catch(error => {
+                        console.error("Error storing URLs in Google Sheet:", error);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error getting IP:", error);
+                });
+        }
+        
+        
+      
     // Content script: extracts all links on the active page.
     function extractLinks() {
         const anchors = document.getElementsByTagName('a');
