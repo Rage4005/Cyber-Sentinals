@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malicious Link Testing Page</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #00ffcc;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff3366;
+        }
+        .link-section {
+            margin: 20px 0;
+        }
+        a {
+            color: #00ffcc;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            margin: 10px 0;
+        }
+        a:hover {
+            color: #ffcc00;
+        }
+        .danger {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>⚠️ Malicious Link Testing Page ⚠️</h1>
+
+    <div class="link-section">
+        <h2>✅ Safe Links</h2>
+        <a href="https://www.google.com" target="_blank">Google</a>
+        <a href="https://github.com" target="_blank">GitHub</a>
+    </div>
+
+    <div class="link-section">
+        <h2>🚨 Phishing Test Links</h2>
+        <a class="danger" href="http://www.thisisaphishingsite.com" target="_blank">Fake Banking Login</a>
+        <a class="danger" href="http://phishing.example.com" target="_blank">Fake Social Media Login</a>
+    </div>
+
+    <div class="link-section">
+        <h2>☠️ Malware Test Links</h2>
+        <a class="danger" href="http://testsafebrowsing.appspot.com/s/malware.html" target="_blank">Google Safe Browsing Malware Test</a>
+        <a class="danger" href="http://malicious.example.com" target="_blank">Unknown Malware Site</a>
+    </div>
+
+    <div class="link-section">
+        <h2>📂 Downloadable Files</h2>
+        <a href="https://example.com/test.exe" download>Download EXE (Potential Virus)</a>
+        <a href="https://example.com/test.zip" download>Download ZIP (Unknown File)</a>
+        <a href="https://example.com/test.pdf" download>Download PDF (Safe File)</a>
+    </div>
+
+    <div class="link-section">
+        <h2>🔍 Obfuscated Links</h2>
+        <a href="https://bit.ly/3xyz" target="_blank">Shortened Link (Bit.ly)</a>
+        <a href="#" onclick="openHiddenLink()">JavaScript Generated Link</a>
+    </div>  
+
+    <script>
+        function openHiddenLink() {
+            window.location.href = "http://hiddenmalware.example.com";
+        }
+    </script>
+
+</body>
+</html>

@@ -9,7 +9,7 @@
         "default_icon": "icon.png"
     },
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "js/background.js"
     },
     "web_accessible_resources": [
         {
