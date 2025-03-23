@@ -1,9 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ironvelo - Cybersecurity Solutions</title>
+    <meta name="description" content="Cyber Sentinals - Smart browser protection against malicious websites" />
+    <meta name="theme-color" content="#54F4FC" />
+    
+    <title>Cyber Sentinals - Smart Browser Protection</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="styles.css" as="style" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600&family=Montserrat:wght@300;600;700&family=Lato:wght@700&display=swap" as="style" />
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@600&family=Montserrat:wght@300;600;700&family=Lato:wght@700&display=swap"
@@ -11,22 +20,27 @@
     />
   </head>
   <body>
+    <!-- Header -->
     <header class="main-header">
       <div class="brand-container">
-        <img src="1.png" alt="Cyber Sentinals Logo" class="brand-logo" />
+        <img src="../img/1.png" alt="Cyber Sentinals Logo" class="brand-logo" width="48" height="48" />
         <h1 class="brand-name animated-text">Cyber Sentinals</h1>
       </div>
-      <nav class="main-nav">
-        <a href="#services-section" class="nav-link">Features</a>
+      
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#services-section" class="nav-link">Services</a>
         <a href="#team-section" class="nav-link">Team</a>
         <a href="#contact-us" class="nav-link">Contact Us</a>
       </nav>
-      <button class="signup-btn">SIGN UP</button>
+      
+      <div class="header-actions">
+        <button class="signup-btn btn" aria-label="Sign up">SIGN UP</button>
+        <button class="hamburger-menu" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
     </header>
 
-    <div class="header-divider"></div>
-
     <main>
+      <!-- Hero Section -->
       <section class="hero-section">
         <div class="hero-content">
           <h2 class="hero-title">
@@ -39,51 +53,37 @@
             constantly monitoring and alerting you about potentially dangerous websites in real-time.
           </p>
           <div class="hero-buttons">
-            <button class="primary-btn">INSTALL NOW</button>
-            <button class="secondary-btn">LEARN MORE</button>
-          </div>
-        </div>
-        <div class="hero-image-container">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f63bcb879c0a48293b5eed4fd195358c16ccbaa"
-            alt="Cybersecurity illustration"
-            class="hero-image"
-          />
-          <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-decoration">
-          <div class="vertical-line"></div>
-          <div class="corner-decorations">
-            <div class="corner top-left"></div>
-            <div class="corner top-right"></div>
-            <div class="corner bottom-left"></div>
-            <div class="corner bottom-right"></div>
+            <button class="btn primary-btn" aria-label="Install extension">INSTALL NOW</button>
+            <a href="#services-section" class="btn secondary-btn" aria-label="Learn more about our services">LEARN MORE</a>
           </div>
         </div>
       </section>
 
-      <section class="about-section">
-        <p class="about-description">
-          <span>At</span>
-          <span class="highlight">Innoverse</span>
-          <span
-            >, we're committed to making your online experience safer. Our browser extension
+      <!-- About Section -->
+      <section class="about-section section" aria-labelledby="about-title">
+        <div class="container">
+          <h2 id="about-title" class="section-title visually-hidden">About Us</h2>
+          <p class="about-description">
+            <span>At</span>
+            <span class="highlight">Cyber Sentinals</span>
+            <span>, we're committed to making your online experience safer. Our browser extension
             works silently in the background, analyzing websites in real-time to protect you
-            from phishing attempts, malware, and other online threats.</span
-          >
-        </p>
-        <div class="stats-container">
-          <div class="stat-item">
-            <span class="stat-number">100K+</span>
-            <span class="stat-label">Threats Detected</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">50K+</span>
-            <span class="stat-label">Active Users</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">99.9%</span>
-            <span class="stat-label">Detection Rate</span>
+            from phishing attempts, malware, and other online threats.</span>
+          </p>
+          
+          <div class="stats-container">
+            <article class="stat-item">
+              <span class="stat-number">100K+</span>
+              <span class="stat-label">Threats Detected</span>
+            </article>
+            <article class="stat-item">
+              <span class="stat-number">50K+</span>
+              <span class="stat-label">Active Users</span>
+            </article>
+            <article class="stat-item">
+              <span class="stat-number">99.9%</span>
+              <span class="stat-label">Detection Rate</span>
+            </article>
           </div>
         </div>
       </section>
@@ -93,14 +93,12 @@
           Trusted by leading organizations and supported by
         </p>
         <div class="client-logos">
+         
           <div class="logo-container">
-            <img src="kjc logo.png" alt="Autonomous" class="client-logo" />
+            <img src="../img/prohect inno google.webp" alt="Google Summer of Code" class="client-logo" />
           </div>
           <div class="logo-container">
-            <img src="prohect inno google.webp" alt="Google Summer of Code" class="client-logo" />
-          </div>
-          <div class="logo-container">
-            <img src="18ac8ba8-d18f-4ee3-9d12-fac9d4d5915f_innoverse25.webp" alt="Google" class="client-logo" />
+            <img src="../img/18ac8ba8-d18f-4ee3-9d12-fac9d4d5915f_innoverse25.webp" alt="Google" class="client-logo" />
           </div>
         </div>
       </section>
@@ -225,25 +223,76 @@
     </main>
 
     <footer class="main-footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Solutions</h3>
-          <nav class="footer-nav">
-            <a href="#">Application Services</a>
-            <a href="#">Security Servers</a>
-            <a href="#">Security FireWalls</a>
-            <a href="#">Cloud Services</a>
-            <a href="#">Integrations</a>
-          </nav>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Solutions</h3>
+            <nav class="footer-nav" aria-label="Footer navigation">
+              <a href="#" class="footer-link">Application Services</a>
+              <a href="#" class="footer-link">Security Servers</a>
+              <a href="#" class="footer-link">Security FireWalls</a>
+              <a href="#" class="footer-link">Cloud Services</a>
+              <a href="#" class="footer-link">Integrations</a>
+            </nav>
+          </div>
         </div>
-        <!-- Additional footer sections -->
-      </div>
-      <div class="footer-bottom">
-        <p class="copyright">© 2024 All Rights Reserved</p>
-        <div class="social-icons">
-          <!-- Social media icons -->
+        
+        <div class="footer-bottom">
+          <p class="copyright">&copy; 2024 Cyber Sentinals. All Rights Reserved</p>
+          <div class="social-icons" aria-label="Social media links">
+            <!-- Add social media icons here -->
+          </div>
         </div>
       </div>
     </footer>
+
+    <!-- Scripts -->
+    <script>
+      // Improved menu toggle functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.querySelector('.hamburger-menu');
+        const nav = document.querySelector('.main-nav');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+          isMenuOpen = !isMenuOpen;
+          nav.style.display = isMenuOpen ? 'flex' : 'none';
+          hamburger.innerHTML = isMenuOpen ? '✕' : '☰';
+          hamburger.setAttribute('aria-expanded', isMenuOpen);
+        }
+
+        // Toggle menu on hamburger click
+        hamburger.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+          if (isMenuOpen && !nav.contains(event.target) && !hamburger.contains(event.target)) {
+            toggleMenu();
+          }
+        });
+
+        // Close menu when clicking a nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            if (window.innerWidth <= 991 && isMenuOpen) {
+              toggleMenu();
+            }
+          });
+        });
+
+        // Handle resize events
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 991) {
+            nav.style.display = 'flex';
+            hamburger.style.display = 'none';
+          } else {
+            hamburger.style.display = 'block';
+            if (!isMenuOpen) {
+              nav.style.display = 'none';
+            }
+          }
+        });
+      });
+    </script>
   </body>
 </html>
