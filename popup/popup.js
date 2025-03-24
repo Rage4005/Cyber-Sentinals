@@ -45,33 +45,42 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Store URLs in Google Sheet using Google Apps Script web app.
     function sendToGoogleSheet(links) {
-        const googleAppsScriptURL = "https://script.google.com/a/macros/kristujayanti.com/s/AKfycbx3w0oY9l2BRk-6C4jTYF6Mox0koSklUzDtZZlv45npXyVpcmI0fxFo5BxteavnpEtj/exec"; // Replace with your actual Google Apps Script web app URL
+        const googleAppsScriptURL = "https://script.google.com/a/macros/kristujayanti.com/s/AKfycbx3w0oY9l2BRk-6C4jTYF6Mox0koSklUzDtZZlv45npXyVpcmI0fxFo5BxteavnpEtj/exec";
 
-            // Get the user's IP using an external API
-            fetch("https://api64.ipify.org?format=json")
-                .then(response => response.json())
+        // Get the user's IP using an external API
+        fetch("https://api64.ipify.org?format=json")
+            .then(response => response.json())
+            .then(data => {
+                const ip = data.ip;
+                
+                // Create an array of link objects with their safety status
+                const linksWithStatus = links.map(link => ({
+                    url: link,
+                    status: linkStatusMapping[link] || "notProcessed"
+                }));
+
+                fetch(googleAppsScriptURL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ 
+                        links: linksWithStatus,
+                        ip: ip
+                    }),
+                })
+                .then(response => response.text())
                 .then(data => {
-                    const ip = data.ip;
-        
-                    fetch(googleAppsScriptURL, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({ links, ip }),
-                    })
-                    .then(response => response.text())
-                    .then(data => {
-                        console.log("Stored URLs with IP:", data);
-                    })
-                    .catch(error => {
-                        console.error("Error storing URLs in Google Sheet:", error);
-                    });
+                    console.log("Stored URLs with IP:", data);
                 })
                 .catch(error => {
-                    console.error("Error getting IP:", error);
+                    console.error("Error storing URLs in Google Sheet:", error);
                 });
-        }
+            })
+            .catch(error => {
+                console.error("Error getting IP:", error);
+            });
+    }
         
         
       
@@ -200,53 +209,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         Object.keys(groups).forEach(domain => {
             const li = document.createElement('li');
-            li.style.display = "flex";
-            li.style.justifyContent = "space-between";
-            li.style.alignItems = "center";
-            li.style.padding = "5px";
-            li.style.marginBottom = "5px";
-            li.style.backgroundColor = "#3a3a4d";
-            li.style.borderRadius = "3px";
-            li.style.cursor = "pointer";
-  
-            li.textContent = `${domain}`;
-  
-            // Evaluate group status.
-            const { status, count } = evaluateGroupStatus(groups[domain]);
-  
-            // Create a badge element.
-            const badge = document.createElement('div');
-            badge.style.width = "20px";
-            badge.style.height = "20px";
-            badge.style.borderRadius = "50%";
-            badge.style.display = "flex";
-            badge.style.justifyContent = "center";
-            badge.style.alignItems = "center";
-            badge.style.fontSize = "10px";
-            badge.style.fontWeight = "bold";
-            badge.style.color = "#ffffff";
-  
-            if (status === "malicious") {
-                badge.style.backgroundColor = "#f44336"; // red
-            } else if (status === "notProcessed") {
-                badge.style.backgroundColor = "#ffc107"; // yellow
-            } else {
-                badge.style.backgroundColor = "#4caf50"; // green
-            }
-            badge.textContent = count;
-  
-            // Container for text and badge.
-            const container = document.createElement('div');
-            container.style.display = "flex";
-            container.style.justifyContent = "space-between";
-            container.style.alignItems = "center";
-            container.style.width = "100%";
-            container.appendChild(document.createTextNode(`${domain} (${groups[domain].length})`));
-            container.appendChild(badge);
-  
-            li.innerHTML = ""; // clear textContent previously set
-            li.appendChild(container);
-  
+            li.className = 'group-item';
+            
+            // Create domain text container
+            const domainText = document.createElement('span');
+            domainText.className = 'domain-text';
+            domainText.textContent = domain;
+            
+            // Evaluate group status
+            const { status } = evaluateGroupStatus(groups[domain]);
+            
+            // Create status indicator
+            const statusIndicator = document.createElement('div');
+            statusIndicator.className = `status-indicator ${status === 'safe' ? 'status-safe' : 'status-unsafe'}`;
+            statusIndicator.textContent = status === 'safe' ? 'SAFE' : 'UNSAFE';
+            
+            // Add elements to list item
+            li.appendChild(domainText);
+            li.appendChild(statusIndicator);
+            
             li.addEventListener('click', () => {
                 displayDetailView(domain, groups[domain]);
             });
@@ -260,37 +241,25 @@ document.addEventListener('DOMContentLoaded', function() {
         detailList.innerHTML = '';
         links.forEach(link => {
             const li = document.createElement('li');
-            li.style.display = "flex";
-            li.style.justifyContent = "space-between";
-            li.style.alignItems = "center";
-            li.style.padding = "5px";
-            li.style.marginBottom = "5px";
-            li.style.backgroundColor = "#3a3a4d";
-            li.style.borderRadius = "3px";
-  
-            const anchor = document.createElement('a');
-            anchor.href = link;
-            anchor.textContent = link;
-            anchor.target = "_blank";
-            anchor.style.flexGrow = "1";
-  
-            const statusIcon = document.createElement('div');
-            statusIcon.style.width = "12px";
-            statusIcon.style.height = "12px";
-            statusIcon.style.borderRadius = "50%";
-  
-            let status = linkStatusMapping[link] || "notProcessed";
-  
-            if (status === "safe") {
-                statusIcon.style.backgroundColor = "#4caf50"; // green
-            } else if (status === "malicious") {
-                statusIcon.style.backgroundColor = "#f44336"; // red
-            } else {
-                statusIcon.style.backgroundColor = "#ffc107"; // yellow
-            }
-  
-            li.appendChild(anchor);
-            li.appendChild(statusIcon);
+            li.className = 'detail-item';
+            
+            // Create link text
+            const linkText = document.createElement('span');
+            linkText.className = 'link-text';
+            linkText.textContent = link;
+            
+            // Get status
+            const status = linkStatusMapping[link] || "notProcessed";
+            
+            // Create status indicator
+            const statusIndicator = document.createElement('div');
+            statusIndicator.className = `status-indicator ${status === 'safe' ? 'status-safe' : 'status-unsafe'}`;
+            statusIndicator.textContent = status === 'safe' ? 'SAFE' : 'UNSAFE';
+            
+            // Add elements to list item
+            li.appendChild(linkText);
+            li.appendChild(statusIndicator);
+            
             detailList.appendChild(li);
         });
         groupView.style.display = "none";

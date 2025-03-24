@@ -8,15 +8,29 @@
 </head>
 <body>
     <div class="container">
-        <img src="../icon.png" alt="icon" id="icon" width="50" height="50">
-        <h1>Cyber Sentinels</h1>
+        <header class="header">
+            <img src="../icon.png" alt="Cyber Sentinels Icon" id="icon" width="50" height="50">
+            <h1>Cyber Sentinels</h1>
+        </header>
     </div>
-    <ul id="group-view"></ul>
-    <div id="detail-view" style="display:none;">
-        <button id="back-btn" class="back-btn">&larr; Back</button>
-        <h2 id="detail-title"></h2>
-        <ul id="detail-list"></ul>
-    </div>
+    
+    <main class="main-content">
+        <section id="group-view" class="group-section">
+            <!-- Groups will be dynamically inserted here -->
+        </section>
+        
+        <section id="detail-view" class="detail-section">
+            <button id="back-btn" class="back-btn" aria-label="Go back">
+                <span class="back-icon">&larr;</span>
+                Back
+            </button>
+            <h2 id="detail-title" class="detail-title"></h2>
+            <div class="detail-content">
+                <ul id="detail-list" class="detail-list"></ul>
+            </div>
+        </section>
+    </main>
+    
     <script type="module" src="popup.js"></script>
 </body>
 </html>
