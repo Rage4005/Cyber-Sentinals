@@ -272,3 +272,55 @@ document.addEventListener('DOMContentLoaded', function() {
         groupView.style.display = "block";
     });
 });
+
+/**
+ * Checks a URL using the VirusTotal API.
+ * VirusTotal requires the URL to be base64 encoded (without trailing "=" characters).
+ * Returns an object with a property "maliciousCount" indicating the number of detections.
+ */
+async function getVirusTotalThreatScore(url) {
+  const API_KEY = "eb7ec2c121e8294fae83f9b62a5428ac440da6c21e17e3dd50f27d5961db6c4f"; // Replace with your VirusTotal API key.
+  
+  // Base64 encode the URL and remove any trailing '=' characters.
+  const urlId = btoa(url).replace(/=+$/, '');
+  
+  const endpoint = `https://www.virustotal.com/api/v3/urls/${urlId}`;
+  try {
+    const response = await fetch(endpoint, {
+      headers: {
+        "x-apikey": API_KEY
+      }
+    });
+    if (!response.ok) {
+      console.error(`VirusTotal API error for ${url}: ${response.statusText}`);
+      return { maliciousCount: 0 };
+    }
+    const data = await response.json();
+    // Example: Use the "last_analysis_stats" from the response to get a count of malicious detections.
+    const stats = data?.data?.attributes?.last_analysis_stats;
+    const maliciousCount = stats ? stats.malicious : 0;
+    return { maliciousCount };
+  } catch (error) {
+    console.error("Error in VirusTotal API for", url, error);
+    return { maliciousCount: 0 };
+  }
+}
+
+async function checkUrlsVirusTotal(urls) {
+  // For each URL, call getVirusTotalThreatScore.
+  const promises = urls.map(url => getVirusTotalThreatScore(url));
+  const results = await Promise.all(promises);
+
+  // Combine the mapping: url -> result
+  const mapping = {};
+  urls.forEach((url, index) => {
+    mapping[url] = results[index];
+  });
+  return mapping;
+}
+
+// Example usage:
+// (async () => {
+//     const result = await getVirusTotalThreatScore("https://example.com/");
+//     console.log("VirusTotal result:", result);
+// })();
