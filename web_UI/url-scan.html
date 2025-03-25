@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Scanner</title>
+    <title>URL Security Scanner</title>
     <link rel="stylesheet" href="url-scan.css">
 </head>
 <body>
     <div class="container">
-        <h2>URL Scanner</h2>
-        <input type="text" id="urlInput" placeholder="Enter URL to Scan">
-        <button onclick="scanUrl()">Scan URL</button>
+        <h2>Enter URL to Scan</h2>
+        <input type="text" id="urlInput" placeholder="Enter URL">
+        <button onclick="scanUrl()">Scan</button>
+        <div id="loading" class="hidden">Scanning...</div>
         <div id="result"></div>
     </div>
 
