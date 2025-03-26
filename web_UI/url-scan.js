@@ -1,15 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Get URL from query parameter if present
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlToScan = urlParams.get('url');
-    
-    if (urlToScan) {
-        // Populate the input field
-        document.getElementById('urlInput').value = urlToScan;
-        // Automatically start the scan
-        scanUrl();
-    }
-});
 
 async function scanUrl() {
     const url = document.getElementById("urlInput").value;

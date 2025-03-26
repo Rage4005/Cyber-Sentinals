@@ -61,7 +61,7 @@ def scan_url():
             "AS Organization": report_data.get("page", {}).get("asnname", "N/A"),
             "TLS Certificate": report_data.get("lists", {}).get("certificates", [{}])[0].get("issuer", "N/A"),
             "Page Title": report_data.get("page", {}).get("title", "N/A"),
-            "Detected Technologies": report_data.get("meta", {}).get("processors", {}).get("wappalyzer", {}).get("data", [])
+            # "Detected Technologies": report_data.get("meta", {}).get("processors", {}).get("wappalyzer", {}).get("data", [])
         }
         
         # Step 5: Extract webpage content

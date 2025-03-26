@@ -180,7 +180,8 @@ h1::before {
     list-style: none;
 }
 
-.detail-list li, .group-section li {
+.detail-list li, .group-section li, .detail-list li a{
+    text-decoration: none;
     padding: 0.75rem;
     background: #222222;
     border-radius: 8px;
