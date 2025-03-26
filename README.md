@@ -1,45 +1,115 @@
-# Cyber Sentinels
+# Cyber Sentinels 🛡️
 
 ## Overview
-Cyber Sentinels is a browser extension designed to extract all links from active webpages and display them in a cyber-themed user interface. This project aims to provide users with an easy way to gather and manage links from their browsing sessions.
+Cyber Sentinels is a sophisticated browser extension that enhances web security by scanning and analyzing links in real-time. Using URLScan.io and advanced AI analysis, it helps users identify potential security threats while browsing.
 
-## Features
-- Extracts all links from the current webpage.
-- Displays links in a visually appealing cyber-themed popup.
-- Provides a detailed dashboard for link management.
-- Lightweight and easy to use.
+## Key Features
+- **Real-time Link Analysis**: Scans all links on active webpages using URLScan.io
+- **AI-Powered Threat Detection**: Utilizes advanced AI to analyze potential security risks
+- **Cyber-themed UI**: Modern, dark-mode interface with interactive elements
+- **Detailed Reports**: Comprehensive security analysis for each scanned URL
+- **Auto-Scan Option**: Toggle automatic scanning of links while browsing
+- **Export Capabilities**: Save and share security reports
 
 ## Project Structure
 ```
-Cyber-Sentinels
-├── src
-│   ├── background.js
-│   ├── content.js
-│   ├── popup
-│   │   ├── popup.html
-│   │   ├── popup.css
-│   │   └── popup.js
-│   ├── dashboard
-│   │   ├── dashboard.html
-│   │   ├── dashboard.css
-│   │   └── dashboard.js
+Cyber-Sentinels/
+├── server/
+│   ├── app.py
+│   └── requirements.txt
+├── web_UI/
+│   ├── url-scan.html
+│   ├── url-scan.css
+│   └── url-scan.js
+├── popup/
+│   ├── popup.html
+│   ├── popup.css
+│   └── popup.js
+├── background/
+│   └── background.js
 ├── manifest.json
 └── README.md
 ```
 
+## Technology Stack
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Backend**: Python, Flask
+- **APIs**: URLScan.io, Google Generative AI, Google Safe Browsing
+- **Extension**: Chrome Extension APIs
+
 ## Installation
-1. Clone the repository or download the source code.
-2. Open your browser and navigate to the extensions page (e.g., chrome://extensions/).
-3. Enable "Developer mode."
-4. Click on "Load unpacked" and select the `Cyber-Sentinels` directory.
+
+### Prerequisites
+- Python 3.8 or higher
+- Chrome/Edge browser
+- URLScan.io API key
+- Google Generative AI API key
+- Google Safe Browsing API key
+
+### Setup Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/Cyber-Sentinels.git
+   cd Cyber-Sentinels
+   ```
+
+2. Install Python dependencies:
+   ```bash
+   cd server
+   pip install -r requirements.txt
+   ```
+
+3. Configure API keys:
+   - Add your URLScan.io API key to `server/server.py`
+   - Add your Google Generative AI key to `server/server.py`
+
+4. Load the extension:
+   - Open Chrome/Edge and navigate to `chrome://extensions/`
+   - Enable "Developer mode"
+   - Click "Load unpacked" and select the `Cyber-Sentinels` directory
 
 ## Usage
-1. Click on the Cyber Sentinels extension icon in your browser toolbar.
-2. The popup will display all the links extracted from the active webpage.
-3. For a more detailed view, navigate to the dashboard.
+1. Click the Cyber Sentinels icon in your browser toolbar
+2. Toggle "Auto Scan Links" to enable automatic scanning
+3. Click on any link to view its detailed security analysis
+4. View comprehensive reports in the URL scan interface
+
+## Development
+To run the development server:
+```bash
+cd server
+python server.py
+```
+The server will start at `http://localhost:5000`
 
 ## Contributing
-Contributions are welcome! Please feel free to submit a pull request or open an issue for any suggestions or improvements.
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Team
+
+### Core Contributors
+- **[@GeorgeShaijuu](https://github.com/GeorgeShaijuu)**
+
+- **[@Rage4005](https://github.com/Rage4005)** 
+
+- **[@TeJu-13-code](https://github.com/TeJu-13-code)** 
+
+### Want to Join?
+We're always looking for passionate developers to join our team! If you're interested in contributing to Cyber Sentinels, please:
+1. Check our [Contributing Guidelines](CONTRIBUTING.md)
+2. Review open [Issues](https://github.com/yourusername/Cyber-Sentinels/issues)
+3. Reach out to the team at [your-email@domain.com]
 
 ## License
-This project is licensed under the Mozilla Public License Version 2.0. See the LICENSE file for more details.
+This project is licensed under the Mozilla Public License Version 2.0 - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+- URLScan.io for their security API
+- Google for the Generative AI API
+- Contributors and supporters of the project
