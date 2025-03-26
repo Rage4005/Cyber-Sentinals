@@ -96,7 +96,7 @@ We welcome contributions! Please follow these steps:
 ### Core Contributors
 - **[@GeorgeShaijuu](https://github.com/GeorgeShaijuu)**
 
-- **[@Rage4005](https://github.com/Rage4005)** 
+- **[@MrJi421](https://github.com/MrJi421)** 
 
 - **[@TeJu-13-code](https://github.com/TeJu-13-code)** 
 
