@@ -161,6 +161,8 @@ document.addEventListener('DOMContentLoaded', function() {
                   } else {
                       resolve(mapping);
                   }
+
+                  updateExtensionIndicator(links);
               })
               .catch(error => {
                   reject(error);
@@ -243,10 +245,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const li = document.createElement('li');
             li.className = 'detail-item';
             
-            // Create link text
-            const linkText = document.createElement('span');
+            // Create link text that's clickable
+            const linkText = document.createElement('a');
             linkText.className = 'link-text';
             linkText.textContent = link;
+            linkText.href = '#';
+            linkText.onclick = (e) => {
+                e.preventDefault();
+                chrome.tabs.create({
+                    url: `../web_UI/url-scan.html?url=${encodeURIComponent(link)}`
+                });
+            };
             
             // Get status
             const status = linkStatusMapping[link] || "notProcessed";
@@ -324,3 +333,86 @@ async function checkUrlsVirusTotal(urls) {
 //     const result = await getVirusTotalThreatScore("https://example.com/");
 //     console.log("VirusTotal result:", result);
 // })();
+
+
+
+// Add this to your existing popup script
+function notifyBackgroundAboutLinkSafety(links) {
+    let maliciousCount = 0;
+    let notProcessedCount = 0;
+
+    links.forEach(link => {
+        const status = linkStatusMapping[link];
+        if (status === 'malicious') maliciousCount++;
+        if (status === 'notProcessed') notProcessedCount++;
+    });
+
+    // Send message to background script
+    chrome.runtime.sendMessage({
+        action: 'updateBadge',
+        maliciousCount,
+        notProcessedCount
+    });
+
+    // Trigger blinking
+    if (maliciousCount > 0) {
+        chrome.runtime.sendMessage({ 
+            action: 'startBlinking', 
+            type: 'unsafe' 
+        });
+    } else if (notProcessedCount > 0) {
+        chrome.runtime.sendMessage({ 
+            action: 'startBlinking', 
+            type: 'warning' 
+        });
+    } else {
+        chrome.runtime.sendMessage({ 
+            action: 'startBlinking', 
+            type: 'safe' 
+        });
+    }
+}
+
+// Call this after processing links
+notifyBackgroundAboutLinkSafety(links);
+
+
+
+
+
+
+
+
+// Add this to your existing event listeners
+document.getElementById('toggleReport').addEventListener('change', function(e) {
+    const isEnabled = e.target.checked;
+    // Save the toggle state
+    chrome.storage.sync.set({ 'autoScanEnabled': isEnabled }, function() {
+        console.log('Auto scan setting saved:', isEnabled);
+    });
+    
+    // If enabled, scan current page links
+    if (isEnabled) {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.scripting.executeScript({
+                target: {tabId: tabs[0].id},
+                function: extractLinks
+            }, (results) => {
+                const links = results[0].result;
+                // Process each link - open in url-scan.html
+                links.forEach(link => {
+                    chrome.tabs.create({
+                        url: `../web_UI/url-scan.html?url=${encodeURIComponent(link)}`
+                    });
+                });
+            });
+        });
+    }
+});
+
+// Restore toggle state when popup opens
+document.addEventListener('DOMContentLoaded', function() {
+    chrome.storage.sync.get('autoScanEnabled', function(data) {
+        document.getElementById('toggleReport').checked = data.autoScanEnabled || false;
+    });
+});

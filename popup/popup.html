@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <header class="header">
-            <img src="../icon.png" alt="Cyber Sentinels Icon" id="icon" width="50" height="50">
+            <img src="../img/icon.png" alt="Cyber Sentinels Icon" id="icon" width="50" height="50">
             <h1>Cyber Sentinels</h1>
         </header>
     </div>
@@ -40,7 +40,20 @@
                 <ul id="detail-list" class="detail-list"></ul>
             </div>
         </section>
+        
     </main>
+
+    <section id="btns" class="main-content-links">
+        <label class="toggle-switch">
+            <input type="checkbox" id="toggleReport">
+            <span class="switch-slider"></span>
+            <span class="switch-label">Auto Scan Links</span>
+        </label>
+        <button id="websiteLink" class="action-btn">
+            <span class="btn-icon">🔗</span>
+            <a href=".././web_UI/index.html" target="_blank">About us</a>
+        </button>
+    </section>
     
     <script type="module" src="popup.js"></script>
 </body>
